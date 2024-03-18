@@ -6,6 +6,14 @@ import {
   useState
 } from "react";
 
+import {
+  HashRouter,
+  Routes,
+  Route,
+  Link,
+  useParams
+} from 'react-router-dom';
+
 
 export default App;
 
@@ -687,28 +695,28 @@ function App() {
 */
 
 
-function Snippet() {
-  // 리액트의 꽃
-  const [liked, setLiked] = useState(false);
+// function Snippet() {
+//   // 리액트의 꽃
+//   const [liked, setLiked] = useState(false);
 
-  function handleClick() {
-    setLiked(!liked);
-  }
+//   function handleClick() {
+//     setLiked(!liked);
+//   }
 
-  return (
-    <>
-      <h1>좋아요 버튼</h1>
-      <svg
-        style={{ width: "2rem", fill: liked ? "#e00" : "#000" }}
-        onClick={handleClick}
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"
-      >
-        <path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path>
-      </svg>
-    </>
-  )
-}
+//   return (
+//     <>
+//       <h1>좋아요 버튼</h1>
+//       <svg
+//         style={{ width: "2rem", fill: liked ? "#e00" : "#000" }}
+//         onClick={handleClick}
+//         xmlns="http://www.w3.org/2000/svg"
+//         viewBox="0 0 512 512"
+//       >
+//         <path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path>
+//       </svg>
+//     </>
+//   )
+// }
 
 
 // function Snippet() {
@@ -722,3 +730,300 @@ function Snippet() {
 //     </>
 //   )
 // }
+
+
+/*
+  리액트 폼
+
+  1 폼 데이터 처리방법
+  2 폼 기술
+*/
+
+
+/*
+  폼 데이터 처리방법
+
+  HTML과 완전히 다르게 처리한다
+  state로 처리한다
+*/
+
+
+// function Snippet() {
+//   const [email, setEmail] = useState("");
+
+//   function handleSubmit(e) {
+//     // 서버 요청 취소
+//     e.preventDefault();
+
+//     // 폼 데이터에 접근하기
+//     console.log("email:", email);
+//   }
+
+//   function handleChange(e) {
+//     // e.target: input
+//     // console.log(e.target.value);
+
+//     // 사용자의 입력값을 email(state)에 저장한다
+//     setEmail(e.target.value);
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <h1>뉴스레터</h1>
+//       <input
+//         type="email"
+//         placeholder="bunny@example.com"
+//         // change 이벤트 - value가 바뀔 때 발생한다
+//         onChange={handleChange}
+//       />
+//       <button type="submit">구독하기</button>
+//     </form>
+//   )
+// }
+
+
+// function Snippet() {
+//   const [name, setName] = useState("");
+//   const [pw, setPw] = useState("");
+
+//   // 폼 제출 처리
+//   function handleSubmit(e) {
+//     e.preventDefault();
+
+//     // 폼데이터에 접근
+//     console.log(`username: ${name}, password: ${pw}`);
+//   }
+
+//   // function handleChangeName(e) {
+//   //   setName(e.target.value);
+//   // }
+
+//   // function handleChangePw(e) {
+//   //   setPw(e.target.value);
+//   // }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <h1>Login</h1>
+//       <div>
+//         {/* label의 자식이 input인 경우, 연결된다 */}
+//         <label>
+//           Username {" "}
+//           <input
+//             type="text"
+//             // onChange={handleChangeName}
+//             onChange={(e) => setName(e.target.value)}
+//           />
+//         </label>
+//       </div>
+//       <div>
+//         <label>
+//           Password {" "}
+//           <input 
+//             type="password"
+//             // onChange={handleChangePw}
+//             onChange={(e) => setPw(e.target.value)}
+//           />
+//         </label>
+//       </div>
+//       <button type="submit">Login</button>
+//     </form>
+//   )
+// }
+
+
+/*
+  폼 기술
+
+  1 동적 제출 버튼
+  2 제출 후 입력란 비우기
+  3 input autofocus 기능
+*/
+
+
+// // 동적 제출 버튼
+// function Snippet() {
+//   const [comment, setComment] = useState("");
+
+//   return (
+//     <>
+//       <h1>댓글 달기</h1>
+//       <input
+//         type="text"
+//         onChange={(e) => setComment(e.target.value)}
+//       />
+//       {/* trim - 문자열 앞/뒤의 공백을 제거한다 */}
+//       <button disabled={!comment.trim()}>전송</button>
+//     </>
+//   )
+// }
+
+
+// // 폼 제출 후 입력란 비우기
+// function Snippet() {
+//   const [todo, setTodo] = useState("");
+
+//   function handleSubmit(e) {
+//     e.preventDefault();
+//     alert("추가되었습니다");
+//     // todo 초기화
+//     setTodo("");
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <h1>할일 앱</h1>
+//       <input
+//         type="text"
+//         value={todo}
+//         onChange={(e) => setTodo(e.target.value)}
+//         placeholder="새 할일"
+//       />
+//       <button>추가</button>
+//     </form>
+//   )
+// }
+
+
+// // autofocus
+// function Snippet() {
+//   // ref 변수 선언
+//   const inputRef = useRef(null);
+
+//   // 비동기적으로 input에 접근 후 focus메서드 호출
+//   useEffect(() => {
+//     // inputRef.current = 실제 input 엘리먼트
+//     inputRef.current.focus();
+
+//     // focus - input의 메서드. 커서를 input에 둔다
+//   })
+
+//   return (
+//     <>
+//       <h1>탐색</h1>
+//       <input
+//         type="search"
+//         placeholder="아이디"
+//         ref={inputRef}
+//       />
+//     </>
+//   )
+// }
+
+
+/*
+  리액트 라우터
+
+  1 기본 라우터
+  2 인증이 적용된 라우터
+*/
+
+
+/*
+  기본 라우터
+
+  클라이언트의 요청과 적절한 리소스를 연결한다
+*/
+
+
+// // 홈 (첫 페이지)
+// function Home() {
+//   return <h1>Home</h1>
+// }
+
+// // 게시물 목록
+// function Posts() {
+//   return (
+//     <>
+//       <h1>Posts</h1>
+//       <ul>
+//         <li>
+//           <Link to="/post/p0">Post 1</Link>
+//         </li>
+//         <li>
+//           <Link to="/post/p1">Post 2</Link>
+//         </li>
+//       </ul>
+//     </>
+//   )
+// }
+
+// // 게시물 보기
+// function Post() {
+//   // useParams: URL의 인자에 접근할 수 있다
+//   const { postId } = useParams();
+//   // params (parameters = 매개변수)
+
+//   return (
+//     <>
+//       <h1>Title</h1>
+//       <p>{postId}</p>
+//     </>
+//   )
+// }
+
+// // 소개 페이지
+// function About() {
+//   return <h1>About</h1>
+// }
+
+// // 404 찾을 수 없음
+// function NotFound() {
+//   return <h1>404 NotFound</h1>
+// }
+
+// // 메인 컴포넌트
+// function Snippet() {
+//   return (
+//     <HashRouter>
+//       <nav>
+//         <ul>
+//           <li>
+//             {/* 링크 */}
+//             <Link to="/">Home</Link>
+//           </li>
+//           <li>
+//             <Link to="/about">About</Link>
+//           </li>
+//           <li>
+//             <Link to="/posts">Posts</Link>
+//           </li>
+//         </ul>
+//       </nav>
+
+//       <Routes>
+//         {/* 요청 주소와 일치하는 path를 가진 Route의 element가 렌더링된다 */}
+//         <Route path="/" element={<Home />} />
+//         <Route path="about" element={<About />} />
+//         <Route path="posts" element={<Posts />} />
+//         {/* :postId - URL 매개변수 */}
+//         <Route path="post/:postId" element={<Post />} />
+//         <Route path="*" element={<NotFound />} />
+//       </Routes>
+//     </HashRouter>
+//   )
+// }
+
+
+function Snippet() {
+  const [todo, setTodo] = useState("");
+
+  function handleSubmit(e){
+    e.preventDefault();
+    alert("추가되었습니다");
+    setTodo("");
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>할일 앱</h1>
+      <input 
+        type="text"
+        placeholder="새 할일"
+        value={todo}
+        onChange={(e) => setTodo(e.target.value)}
+      />
+      <button disabled={!todo.trim()}>추가</button>
+    </form>
+  )
+}

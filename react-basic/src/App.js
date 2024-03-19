@@ -1005,25 +1005,318 @@ function App() {
 // }
 
 
-function Snippet() {
-  const [todo, setTodo] = useState("");
+// function Snippet() {
+//   const [todo, setTodo] = useState("");
+//   const inputRef = useRef(null);
 
-  function handleSubmit(e){
-    e.preventDefault();
-    alert("추가되었습니다");
-    setTodo("");
+//   useEffect(() => {
+//     inputRef.current.focus();
+//   })
+
+//   function handleSubmit(e){
+//     e.preventDefault();
+//     alert("추가되었습니다");
+//     setTodo("");
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <h1>할일 앱</h1>
+//       <input 
+//         type="text"
+//         placeholder="새 할일"
+//         value={todo}
+//         onChange={(e) => setTodo(e.target.value)}
+//         ref={inputRef}
+//       />
+//       <button disabled={!todo.trim()}>추가</button>
+//     </form>
+//   )
+// }
+
+
+/*
+  인증 기능이 적용된 라우터
+*/
+
+
+// // context 변수 선언
+// const AuthContext = createContext();
+
+// // 유저데이터 관리
+// function AuthProvider({ children }) {
+//   // 유저 데이터
+//   const [user, setUser] = useState(null);
+
+//   // user: user -> user (key와 value가 같을 때 value를 생략할 수 있음)
+//   const value = { user, setUser };
+
+//   return (
+//     // value 객체를 하위 컴포넌트에 전달
+//     <AuthContext.Provider value={value}>
+//       {children}
+//     </AuthContext.Provider>
+//   )
+// }
+
+// // 상태 메시지 관리
+// function AuthStatus() {
+//   // value 객체에 접근
+//   const { user, setUser } = useContext(AuthContext);
+
+//   return user ? (
+//     <p>
+//       안녕하세요, {user}님! {" "}
+//       <button onClick={() => setUser(null)}>로그아웃</button>
+//     </p>
+//   ) : (
+//     <p>로그인하세요</p>
+//   )
+// }
+
+// // 인증 검사 역할
+// function AuthRequired({ children }) {
+//   // value 객체에 접근
+//   const { user, setUser } = useContext(AuthContext);
+//   const [username, setUsername] = useState("");
+
+//   function handleSubmit(e) {
+//     e.preventDefault();
+
+//     // user업데이트
+//     setUser(username);
+//   }
+
+//   // 인증(로그인)을 하지 않았을 때
+//   if (!user) {
+//     // 로그인 폼을 보여준다
+//     return (
+//       <form onSubmit={handleSubmit}>
+//         <h1>로그인</h1>
+//         <input
+//           type="text"
+//           onChange={(e) => setUsername(e.target.value)}
+//           required
+//         />
+//         <button type="submit">로그인</button>
+//       </form>
+//     )
+//   }
+
+//   // children - Post 컴포넌트
+//   return children;
+// }
+
+// // 홈 (첫 페이지)
+// function Home() {
+//   return <h1>Home</h1>
+// }
+
+// // 게시물 목록
+// function Posts() {
+//   return (
+//     <>
+//       <h1>Posts</h1>
+//       <ul>
+//         <li>
+//           <Link to="/post/p0">Post 1</Link>
+//         </li>
+//         <li>
+//           <Link to="/post/p1">Post 2</Link>
+//         </li>
+//       </ul>
+//     </>
+//   )
+// }
+
+// // 게시물 보기
+// function Post() {
+//   // useParams: URL의 인자에 접근할 수 있다
+//   const { postId } = useParams();
+//   // params (parameters = 매개변수)
+
+//   return (
+//     <>
+//       <h1>Title</h1>
+//       <p>{postId}</p>
+//     </>
+//   )
+// }
+
+// // 소개 페이지
+// function About() {
+//   return <h1>About</h1>
+// }
+
+// // 404 찾을 수 없음
+// function NotFound() {
+//   return <h1>404 NotFound</h1>
+// }
+
+// // 메인 컴포넌트
+// function Snippet() {
+//   return (
+//     <HashRouter>
+//       <AuthProvider>
+//         <nav>
+//           <ul>
+//             <li>
+//               {/* 링크 */}
+//               <Link to="/">Home</Link>
+//             </li>
+//             <li>
+//               <Link to="/about">About</Link>
+//             </li>
+//             <li>
+//               <Link to="/posts">Posts</Link>
+//             </li>
+//           </ul>
+//         </nav>
+
+//         <AuthStatus />
+
+//         <Routes>
+//           {/* 요청 주소와 일치하는 path를 가진 Route의 element가 렌더링된다 */}
+//           <Route path="/" element={<Home />} />
+//           <Route path="about" element={<About />} />
+//           <Route path="posts" element={<Posts />} />
+//           {/* :postId - URL 매개변수 */}
+//           <Route path="post/:postId" element={
+//             <AuthRequired>
+//               <Post />
+//             </AuthRequired>
+//           } />
+//           <Route path="*" element={<NotFound />} />
+//         </Routes>
+//         </AuthProvider>
+//     </HashRouter>
+//   )
+// }
+
+
+/*
+  데이터 가져오기
+
+  1 useEffect Hook
+  2 데이터 가져오기 예시
+*/
+
+
+/*
+  useEffect Hook
+  앱에 다양한 효과(effect)를 줄 수 있다
+  예를 들어 데이터 가져오기, 실제 엘리먼트에 접근하기 등
+
+  - 사용방법
+
+  1 useEffect(effect)
+  컴포넌트가 호출될 때 이펙트를 실행한다
+
+  2 useEffect(effect, [])
+  컴포넌트가 최초로 호출될 때 이펙트를 실행한다
+
+  3 useEffect(effect, [deps])
+  컴포넌트가 최초로 호출 될때 그리고 deps(dependencies)가
+  업데이트 될때 이펙트를 실행한다
+*/
+
+
+// function Snippet() {
+//   // setState - 컴포넌트를 호출한다
+//   const [count, setCount] =useState(0);
+
+//   useEffect(() => {
+//     console.log("이펙트 발생")
+//   }, [])
+
+//   return (
+//     <>
+//       <h1>useEffect Hook</h1>
+//       <p>count: {count}</p>
+//       <button onClick={() => setCount(count + 1)}>
+//         +
+//       </button>
+//     </>
+//   )
+// }
+
+
+/*
+  데이터 가져오기 예시
+*/
+
+
+// 서버에 데이터를 요청하는 함수
+function getProfile() {
+  // 서버에서 가져올 데이터
+  const DATA = {
+    username: "doggy",
+    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQJjHY4DexDJWPHtjECnXAgo2DR2PeksT21g&usqp=CAU",
+    bio: "정신이 좀 드는가"
   }
 
+  const promise = new Promise((res, rej) => {
+    // 데이터를 가져오는 데 2초가 걸린다고 가정
+    setTimeout(() => {
+      // 요청 성공
+      res(DATA)
+    }, 2000);
+  })
+
+  // 함수는 응답결과를 프로미스 객체로 리턴한다
+  return promise;
+}
+
+function Snippet() {
+  // 에러 처리
+  const [error, setError] = useState(null);
+  // 대기상태 관리
+  const [isLoaded, setIsLoaded] = useState(false);
+  // 데이터 관리
+  const [profile, setProfile] = useState(null);
+
+  // 데이터 요청
+  useEffect(() => {
+    getProfile() // 서버 요청함수 호출
+      .then(data => { // 요청 성공시에 데이터를 처리하는 부분
+        
+        // 전송받은 데이터로 profile을 업데이트한다
+        setProfile(data)
+      })
+      .catch(error => { // 요청 실패시에 에러를 처리하는 부분
+        setError(error)
+      })
+      .finally(() => setIsLoaded(true)) // 최종 작업
+      // 성공 실패 여부와 상관없이 항상 실행된다
+  }, [])
+
+  // 에러가 발생한 경우
+  if (error) {
+    return <p>잠시 후 다시 시도해주세요</p>
+  }
+
+  // 가져오는 중
+  if (!isLoaded) {
+    return <p>데이터를 가져오는 중입니다..</p>
+  }
+
+  // 렌더링
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>할일 앱</h1>
-      <input 
-        type="text"
-        placeholder="새 할일"
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
+    <>
+      <h1>Profile</h1>
+      <img
+        src={profile.avatar}
+        alt={profile.username}
+        style={{
+          width: "100px",
+          height: "100px",
+          objectFit: "cover",
+          border: "1px solid #ddd",
+          borderRadius: "99px",
+        }}
       />
-      <button disabled={!todo.trim()}>추가</button>
-    </form>
+      <h3>{profile.username}</h3>
+      <p>{profile.bio}</p>
+    </>
   )
 }

@@ -2,18 +2,18 @@ import { useState, useEffect } from "react";
 import Mytube from "./components/video";
 
 const SEED = [
-  { id: "mytube-0", img: "/nat-cole-king.webp", name: "The Best of NAT KING COLE Greatest Hits" },
-  { id: "mytube-1", img: "/yiruma.webp", name: "YIRUMA - Best Playlist Ever" },
-  { id: "mytube-2", img: "/norway.webp", name: "16 Best Places to Visit in Norway" },
-  { id: "mytube-3", img: "/genesis.webp", name: "2023 Genesis G90 Review! $100,000 Rolls-Royce" },
+  { id: "mytube-0", img: "/nat-cole-king.webp", name: "The Best of NAT KING COLE Greatest Hits", video: "music" },
+  { id: "mytube-1", img: "/yiruma.webp", name: "YIRUMA - Best Playlist Ever", video: "music" },
+  { id: "mytube-2", img: "/norway.webp", name: "16 Best Places to Visit in Norway", video: "travel" },
+  { id: "mytube-3", img: "/genesis.webp", name: "2023 Genesis G90 Review! $100,000 Rolls-Royce", video: "car" },
 ]
 
 // 차 구매 옵션
 const carOption = [
-  { id: "car-0", name: "스타리아" },
-  { id: "car-1", name: "아반떼 하이브리드" },
-  { id: "car-2", name: "코나" },
-  { id: "car-3", name: "캐스퍼" },
+  { id: "c0", name: "스타리아" },
+  { id: "c1", name: "아반떼 하이브리드" },
+  { id: "c2", name: "코나" },
+  { id: "c3", name: "캐스퍼" },
 ]
 
 function saveData(videos) {
@@ -27,9 +27,9 @@ if (!localStorage.getItem("videosData")) {
 
 const FILTER_MAP = {
   전체: () => true,
-  음악: (videos) => videos.music,
-  여행: (videos) => videos.travel,
-  자동차: (videos) => videos.car 
+  음악: (video) => "music",
+  여행: (video) => "travel",
+  자동차: (video) => "car" 
 }
 
 // 필터 이름 - 전체, 음악, 여행, 자동차
@@ -41,9 +41,7 @@ export default function App() {
   // 현재 적용중인 필터
   const [filter, setFilter] = useState("전체");
   const [search, setSearch] = useState(false);
-  const [back, setBack] = useState(false);
   const [menu, setMenu] = useState(false);
-  // const [hide, setHide] = useState(false);
 
   console.log(videos);
 
@@ -60,20 +58,10 @@ const searchClickButton = () => {
   setSearch(search => (!search));
 }
 
-// 검색 뒤로가기 기능 처리
-const backClickButton = () => {
-  setBack(back => (!back));
-}
-
 // 메뉴 기능 처리
 const menuClickButton = () => {
   setMenu(menu => (!menu));
 }
-
-// // 메뉴 숨기기 기능 처리
-// const hideClickButton = () => {
-//   setHide(hide => (!hide));
-// }
 
   // 필터 버튼 렌더링
   const filterButtons = FILTER_NAMES.map(name => (
@@ -93,6 +81,9 @@ const menuClickButton = () => {
       id={video.id}
       img={video.img}
       name={video.name}
+      music={video.music}
+      travel={video.travel}
+      car={video.car}
     />
   ))
 
@@ -144,17 +135,17 @@ const menuClickButton = () => {
               </svg>
           </button>
         </div>
-        <div className="flex text-white gap-2 py-2 px-4">
+        <div className="flex gap-2 py-2 px-4">
           {filterButtons}
         </div>
       </header>
 
       <div
-        style={{display: search ? "block" : "!block"}}
+        style={{display: search ? "block" : null}}
         className="fixed bg-black inset-0 hidden">
         <div className="flex items-center mt-4 px-4">
           <svg
-            onClick={backClickButton}
+            onClick={searchClickButton}
             className="w-4 fill-white"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512">
@@ -169,7 +160,7 @@ const menuClickButton = () => {
       </div>
 
       <nav
-        style={{left: menu ? "0px" : "!(0px)"}}
+        style={{left: menu ? "0px" : null}}
         className="fixed top-0 -left-60 w-60 h-screen px-4 z-20 transition-all bg-black text-white ">
         <div className="my-4 flex items-center">
         <svg 
@@ -198,8 +189,8 @@ const menuClickButton = () => {
       {/* </main>  */}
 
       <div 
-        // onClick={hideClickButton}
-        style={{display: menu ? "block" : "!block"}}
+        onClick={menuClickButton}
+        style={{display: menu ? "block" : null}}
         className="fixed inset-0 bg-black/[0.4] hidden">
       </div>
       <main className="mt-32 px-4 pb-8 bg-black">
@@ -241,46 +232,46 @@ const menuClickButton = () => {
           <li className="mb-2">
             <input 
               type="radio"
-              // id="s0"
+              id="c0"
               name="survey"
               className="peer hidden"
               // value={carOption.name}
               // value="캐스퍼"
             />
-            <label className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">스타리아</label>
+            <label htmlFor="c0" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">스타리아</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id={carOption.id}
+              id="c1"
               name="survey"
               className="peer hidden"
-              value={carOption.name}
+              // value={carOption.name}
               // value="캐스퍼"
             />
-            <label className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">아반떼 하이브리드</label>
+            <label htmlFor="c1" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">아반떼 하이브리드</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id={carOption.id}
+              id="c2"
               name="survey"
               className="peer hidden"
-              value={carOption.name}
+              // value={carOption.name}
               // value="캐스퍼"
             />
-            <label className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">코나</label>
+            <label htmlFor="c2" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">코나</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id={carOption.id}
+              id="c3"
               name="survey"
               className="peer hidden"
-              value={carOption.name}
+              // value={carOption.name}
               // value="캐스퍼"
             />
-            <label className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">캐스퍼</label>
+            <label htmlFor="c3" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">캐스퍼</label>
           </li>
         </ol>
       </main>

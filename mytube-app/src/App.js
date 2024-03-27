@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Mytube from "./components/video";
 
 const SEED = [
-  { id: "mytube-0", img: "/nat-cole-king.webp", name: "The Best of NAT KING COLE Greatest Hits", video: "music" },
-  { id: "mytube-1", img: "/yiruma.webp", name: "YIRUMA - Best Playlist Ever", video: "music" },
-  { id: "mytube-2", img: "/norway.webp", name: "16 Best Places to Visit in Norway", video: "travel" },
-  { id: "mytube-3", img: "/genesis.webp", name: "2023 Genesis G90 Review! $100,000 Rolls-Royce", video: "car" },
+  { id: "mytube-0", img: "/nat-cole-king.webp", name: "The Best of NAT KING COLE Greatest Hits", type: "music" },
+  { id: "mytube-1", img: "/yiruma.webp", name: "YIRUMA - Best Playlist Ever", type: "music" },
+  { id: "mytube-2", img: "/norway.webp", name: "16 Best Places to Visit in Norway", type: "travel" },
+  { id: "mytube-3", img: "/genesis.webp", name: "2023 Genesis G90 Review! $100,000 Rolls-Royce", type: "car" },
 ]
 
 // 차 구매 옵션
@@ -27,9 +27,9 @@ if (!localStorage.getItem("videosData")) {
 
 const FILTER_MAP = {
   전체: () => true,
-  음악: (video) => "music",
-  여행: (video) => "travel",
-  자동차: (video) => "car" 
+  음악: (video) => video.music,
+  여행: (video) => video.travel,
+  자동차: (video) => video.car 
 }
 
 // 필터 이름 - 전체, 음악, 여행, 자동차
@@ -42,6 +42,7 @@ export default function App() {
   const [filter, setFilter] = useState("전체");
   const [search, setSearch] = useState(false);
   const [menu, setMenu] = useState(false);
+  const inputRef = useRef(null);
 
   console.log(videos);
 
@@ -63,11 +64,16 @@ const menuClickButton = () => {
   setMenu(menu => (!menu));
 }
 
+// focus 메서드
+useEffect(() => {
+  inputRef.current.focus();
+})
+
   // 필터 버튼 렌더링
   const filterButtons = FILTER_NAMES.map(name => (
     <button
       key={name}
-      className="text-white px-4 py-1 bg-zinc-800 rounded-lg disabled: bg-white disabled: text-black"
+      className="text-white px-4 py-1 bg-zinc-800 rounded-lg disabled:bg-white disabled:text-black"
       disabled={name == filter}
       onClick={() => setFilter(name)}
     >
@@ -76,24 +82,25 @@ const menuClickButton = () => {
   ))
 
   const videoList = videos.filter(FILTER_MAP[filter]).map(video => (
-    <video
+    <videoList
       key={video.id}
       id={video.id}
       img={video.img}
       name={video.name}
-      music={video.music}
-      travel={video.travel}
-      car={video.car}
+      type={video.type}
+      // music={video.music}
+      // travel={video.travel}
+      // car={video.car}
     />
   ))
 
-  const carList = carOption.filter(FILTER_MAP[filter]).map(car => (
-    <car
-      key={car.id}
-      id={car.id}
-      name={car.name}
-    />
-  ))
+// carOption.map(car => (
+//   <carOption
+//     key={car.id}
+//     id={car.id}
+//     name={car.name}
+//   />
+// ))
 
   return (
     <>
@@ -155,6 +162,7 @@ const menuClickButton = () => {
             type="text"
             placeholder="Search MyTube"
             className="w-full px-4 py-1 ml-2 bg-zinc-800 text-white outline-none rounded-full"
+            ref={inputRef}
           />
         </div>
       </div>
@@ -179,15 +187,6 @@ const menuClickButton = () => {
         </ul>
       </nav>
 
-      {/* <main className="mt-32 px-4 pb-8">?\ */}
-        {/* {/* <ul>
-          <li> */}
-            {/* <img src={`balckpink.jpg`}></img> */}
-            <h3 className="font-semibold text-white">{SEED.name}</h3>
-          {/* </li>
-        </ul> */}
-      {/* </main>  */}
-
       <div 
         onClick={menuClickButton}
         style={{display: menu ? "block" : null}}
@@ -195,7 +194,7 @@ const menuClickButton = () => {
       </div>
       <main className="mt-32 px-4 pb-8 bg-black">
         <ul>
-          {/* {videoList} */}
+          {/* {videoList.name} */}
           <li className="mb-8">
             <img className="w-full" src="/nat-cole-king.webp"/>
             <h3 className="font-semibold my-2 text-white">The Best of NAT KING COLE Greatest Hits</h3>
@@ -216,62 +215,51 @@ const menuClickButton = () => {
         <h3 className="text-lg my-4 font-semibold text-white">다음 중 어떤 차를 구매하시겠습니까?</h3>
         {/* <ol>
           <li className="mb-2">
-            <input type="radio"><label>스타리아</label></input>
-          </li>
-          <li className="mb-2">
-            <input type="radio"><label>스타리아</label></input>
-          </li>
-          <li className="mb-2">
-            <input type="radio"><label>스타리아</label></input>
-          </li>
-          <li className="mb-2">
-            <input type="radio"><label>스타리아</label></input>
-          </li>
+              <input 
+                type="radio"
+                id={carOption.id}
+                name="survey"
+                className="peer hidden"
+              />
+              <label htmlFor={carOption.id} className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">{carOption.name}</label>
+            </li>
         </ol> */}
         <ol>
           <li className="mb-2">
             <input 
               type="radio"
-              id="c0"
+              id={carOption[0].id}
               name="survey"
               className="peer hidden"
-              // value={carOption.name}
-              // value="캐스퍼"
             />
-            <label htmlFor="c0" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">스타리아</label>
+            <label htmlFor={carOption[0].id} className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">{carOption[0].name}</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id="c1"
+              id={carOption[1].id}
               name="survey"
               className="peer hidden"
-              // value={carOption.name}
-              // value="캐스퍼"
             />
-            <label htmlFor="c1" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">아반떼 하이브리드</label>
+            <label htmlFor={carOption[1].id} className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">{carOption[1].name}</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id="c2"
+              id={carOption[2].id}
               name="survey"
               className="peer hidden"
-              // value={carOption.name}
-              // value="캐스퍼"
             />
-            <label htmlFor="c2" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">코나</label>
+            <label htmlFor={carOption[2].id} className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">{carOption[2].name}</label>
           </li>
           <li className="mb-2">
             <input 
               type="radio"
-              id="c3"
+              id={carOption[3].id}
               name="survey"
               className="peer hidden"
-              // value={carOption.name}
-              // value="캐스퍼"
             />
-            <label htmlFor="c3" className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">캐스퍼</label>
+            <label htmlFor={carOption[3].id} className="block p-2 border-2 rounded border-gray-400 text-gray-400 peer-checked:border-sky-600 peer-checked:text-sky-600">{carOption[3].name}</label>
           </li>
         </ol>
       </main>

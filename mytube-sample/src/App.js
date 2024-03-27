@@ -88,6 +88,8 @@ export default function App() {
               </h1>
             </div>
           </div>
+
+          {/* 검색버튼 */}
           <button 
             className="px-4 flex items-center" 
             onClick={() => searchActive(true)}>
@@ -99,10 +101,19 @@ export default function App() {
               </svg>
           </button>
         </div>
+
         <div className="flex gap-2 py-2 px-4">
           {filterButtons}
         </div>
       </header>
+
+      <Search active={searchActive} setActive={setSearchActive} />
+      <SideBar active={sideBarActive} setActive={setSideBarActive} />
+
+      <main className="mt-32 px-4 pb-8">
+        <ul>{videoList}</ul>
+        <Survey />
+      </main>
     </>
   )
 };

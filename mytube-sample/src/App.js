@@ -59,8 +59,9 @@ export default function App() {
     <>
       <header className="fixed w-full top-0 box-content bg-black">
         <div className="flex justify-between h-12">
+          {/* 메뉴버튼 / 로고 */}
           <div className="flex items-center">
-            {/* 메뉴 버튼 / 로고 */}
+            {/* 메뉴버튼 */}
             <button
               onClick={() => setSideBarActive(true)}
               className="px-4 h-full"
@@ -73,7 +74,7 @@ export default function App() {
                 <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/>
               </svg>
             </button>
-
+            {/* 로고 */}
             <div className="flex items-center">
               <svg 
                 className="w-8 fill-white"

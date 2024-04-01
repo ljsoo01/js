@@ -8,19 +8,31 @@ const INFO = [
 
 export default function Information() {
 
-  useEffect(() => {
-    
-  })
+  const [activeToggle, setActiveToggle] = useState(false);
+
+  // 아코디언 기능 처리
+  const acordionBtn = () => {
+    setActiveToggle(activeToggle => (!activeToggle));
+  }
 
   const infoList = INFO.map(information => 
   (
     <li key={information.id} className="mb-1">
       <button 
+        onClick={acordionBtn}
         className="w-full px-4 py-2 bg-gray-100 flex justify-between"
       >
         {information.name}
-        <span>+</span>
+        <span> + </span>
       </button>
+      <div 
+        className=" transition-all hidden"
+        style={{display: activeToggle ? "block" : null }}
+      >
+        <p className="p-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi exercitationem dolor, laboriosam alias magni maiores repellendus aut temporibus!
+        </p>
+      </div>
     </li>
   ))
 
@@ -30,11 +42,16 @@ export default function Information() {
       <ul>
         {infoList}
       </ul>
-      <div>
+      {/* <div 
+        className="overflow-hidden transition-all hidden"
+        style={{display: active && "0px"}}
+      >
         <p className="p-2">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi exercitationem dolor, laboriosam alias magni maiores repellendus aut temporibus!
         </p>
-      </div>
+      </div> */}
+
+
     </>
   )
 };

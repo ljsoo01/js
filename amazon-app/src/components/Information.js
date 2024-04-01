@@ -23,7 +23,7 @@ export default function Information() {
         className="w-full px-4 py-2 bg-gray-100 flex justify-between"
       >
         {information.name}
-        <span> + </span>
+        <span>{(activeToggle === true) ? "-" : "+"}  </span>
       </button>
       <div 
         className=" transition-all hidden"

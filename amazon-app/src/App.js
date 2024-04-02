@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Product from "./components/Product";
 import Information from "./components/Information"
 
 export default function App() {
 
   const [scrollBtn, setScrollBtn] = useState(false);
+  const [scrollY, setScrolly] = useState(0);
+
+  const handleFollow = () => {
+    if(scrollY > 100) {
+      setScrollBtn(true);
+    } else {
+      setScrollBtn(false);
+    }
+  }
 
   const moveTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth'});
+    setScrolly(0);
+    setScrollBtn(false)
   };
 
   return (

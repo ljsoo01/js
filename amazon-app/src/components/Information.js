@@ -26,6 +26,7 @@ export default function Information() {
         <span>{(activeToggle === true) ? "-" : "+"}  </span>
       </button>
       <div 
+        onClick={information.id === information.name}
         className=" transition-all hidden"
         style={{display: activeToggle ? "block" : null }}
       >

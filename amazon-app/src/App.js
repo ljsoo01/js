@@ -5,21 +5,25 @@ import Information from "./components/Information"
 export default function App() {
 
   const [scrollBtn, setScrollBtn] = useState(false);
-  const [scrollY, setScrolly] = useState(0);
-
-  const handleFollow = () => {
-    if(scrollY > 100) {
-      setScrollBtn(true);
-    } else {
-      setScrollBtn(false);
-    }
-  }
+  // const [scrollY, setScrolly] = useState(0);
 
   const moveTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth'});
-    setScrolly(0);
-    setScrollBtn(false)
   };
+
+
+  // const scrolly = () => {
+  //   if (window.scrollY > 1000) {
+  //     <svg 
+  //       style={{display: (window.scrollY > 1000) ? "block" : "none"}}
+  //       onClick={moveTop}
+  //       className="fixed w-8 right-4 bottom-8 opacity-50"
+  //       xmlns="http://www.w3.org/2000/svg" 
+  //       viewBox="0 0 512 512">
+  //         <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM377 271c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-87-87-87 87c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 167c9.4-9.4 24.6-9.4 33.9 0L377 271z"/>
+  //     </svg>
+  //   }
+  // }
 
   return (
     <>
@@ -47,11 +51,13 @@ export default function App() {
 
       {/* 위로 올라가기 */}
       <svg 
+        // style={{display: (window.scrollY > 1000) ? "block" : "none"}}
         onClick={moveTop}
         className="fixed w-8 right-4 bottom-8 opacity-50"
         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM377 271c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-87-87-87 87c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9L239 167c9.4-9.4 24.6-9.4 33.9 0L377 271z"/>
       </svg>
+      {/* {scrollY} */}
     </>
   )
 }

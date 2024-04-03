@@ -11,7 +11,7 @@ export default function Product() {
   const [filter, setFilter] = useState(true);
 
   const ImagesShow = IMAGES.map((image) => (
-    <img className="h-full object-cover" src={image.src}>
+    <img className="h-full object-cover" src={image.src[0]}>
     </img>
   ));
 

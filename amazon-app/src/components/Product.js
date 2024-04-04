@@ -2,9 +2,9 @@ import { useState } from "react";
 
 // 핸드폰 이미지
 const IMAGES = [
-  { id: "i0", src: "https://tvvmvn.github.io/blackboard/images/product-1.jpeg", show: true},
-  { id: "i1", src: "https://tvvmvn.github.io/blackboard/images/product-2.jpeg", show: false},
-  { id: "i2", src: "https://tvvmvn.github.io/blackboard/images/product-3.jpeg", show: false}
+  { id: "i0", src: "https://tvvmvn.github.io/blackboard/images/product-1.jpeg"},
+  // { id: "i1", src: "https://tvvmvn.github.io/blackboard/images/product-2.jpeg"},
+  // { id: "i2", src: "https://tvvmvn.github.io/blackboard/images/product-3.jpeg"}
 ];
 
 export default function Product() {
@@ -32,11 +32,11 @@ export default function Product() {
         </button>
       </div>
 
-      {/* <div>
+      <div className="flex justify-center my-4">
         <span className="w-2 h-2 mx-1 rounded-full bg-gray-200"></span>
-        <span></span>
-        <span></span>
-      </div> */}
+        <span className="w-2 h-2 mx-1 rounded-full bg-gray-200"></span>
+        <span className="w-2 h-2 mx-1 rounded-full bg-gray-200"></span>
+      </div>
 
       {/* 가격 */}
       <div className="text-4xl font-semibold my-8">$799</div>

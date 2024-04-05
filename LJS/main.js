@@ -587,21 +587,22 @@
 */
 
 
-const promise = new Promise((res, rej) => {
-  res("야옹");
-})
+// const promise = new Promise((res, rej) => {
+//   res("야옹");
+// })
 
-async function f() {
-  try {
+// async function f() {
+//   try {
 
-    // 프로미스 객체가 결과를 반환할 때까지 기다린다(await)
-    const data = await promise;
+//     // 프로미스 객체가 결과를 반환할 때까지 기다린다(await)
+//     const data = await promise;
 
-    console.log("서버에서 받은 데이터:", data);
+//     console.log("서버에서 받은 데이터:", data);
 
-  } catch (error) { // 에러처리
-    console.log("에러:", error);
-  }
-}
+//   } catch (error) { // 에러처리
+//     console.log("에러:", error);
+//   }
+// }
 
-f();
+// f();
+

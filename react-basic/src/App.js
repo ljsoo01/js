@@ -1247,76 +1247,159 @@ function App() {
 
 
 // 서버에 데이터를 요청하는 함수
-function getProfile() {
-  // 서버에서 가져올 데이터
-  const DATA = {
-    username: "doggy",
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQJjHY4DexDJWPHtjECnXAgo2DR2PeksT21g&usqp=CAU",
-    bio: "정신이 좀 드는가"
-  }
+// function getProfile() {
+//   // 서버에서 가져올 데이터
+//   const DATA = {
+//     username: "doggy",
+//     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQJjHY4DexDJWPHtjECnXAgo2DR2PeksT21g&usqp=CAU",
+//     bio: "정신이 좀 드는가"
+//   }
 
-  const promise = new Promise((res, rej) => {
-    // 데이터를 가져오는 데 2초가 걸린다고 가정
-    setTimeout(() => {
-      // 요청 성공
-      res(DATA)
-    }, 2000);
-  })
+//   const promise = new Promise((res, rej) => {
+//     // 데이터를 가져오는 데 2초가 걸린다고 가정
+//     setTimeout(() => {
+//       // 요청 성공
+//       res(DATA)
+//     }, 2000);
+//   })
 
-  // 함수는 응답결과를 프로미스 객체로 리턴한다
-  return promise;
-}
+//   // 함수는 응답결과를 프로미스 객체로 리턴한다
+//   return promise;
+// }
+
+// function Snippet() {
+//   // 에러 처리
+//   const [error, setError] = useState(null);
+//   // 대기상태 관리
+//   const [isLoaded, setIsLoaded] = useState(false);
+//   // 데이터 관리
+//   const [profile, setProfile] = useState(null);
+
+//   // 데이터 요청
+//   useEffect(() => {
+//     getProfile() // 서버 요청함수 호출
+//       .then(data => { // 요청 성공시에 데이터를 처리하는 부분
+        
+//         // 전송받은 데이터로 profile을 업데이트한다
+//         setProfile(data)
+//       })
+//       .catch(error => { // 요청 실패시에 에러를 처리하는 부분
+//         setError(error)
+//       })
+//       .finally(() => setIsLoaded(true)) // 최종 작업
+//       // 성공 실패 여부와 상관없이 항상 실행된다
+//   }, [])
+
+//   // 에러가 발생한 경우
+//   if (error) {
+//     return <p>잠시 후 다시 시도해주세요</p>
+//   }
+
+//   // 가져오는 중
+//   if (!isLoaded) {
+//     return <p>데이터를 가져오는 중입니다..</p>
+//   }
+
+//   // 렌더링
+//   return (
+//     <>
+//       <h1>Profile</h1>
+//       <img
+//         src={profile.avatar}
+//         alt={profile.username}
+//         style={{
+//           width: "100px",
+//           height: "100px",
+//           objectFit: "cover",
+//           border: "1px solid #ddd",
+//           borderRadius: "99px",
+//         }}
+//       />
+//       <h3>{profile.username}</h3>
+//       <p>{profile.bio}</p>
+//     </>
+//   )
+// }
+
+
+// function Snippet() {
+//   const [result, setResult] = useState(null);
+
+//   function handleChange(e) {
+//     const pw = e.target.value;
+
+//     console.log(e.target.value)
+
+//     try {
+//       if (!pw) {
+//         throw "Password is required";
+//       }
+
+//       if (pw.length < 8) {
+//         throw "Too short!";
+//       } 
+
+//       setResult({ pass: true, message: "Done!" });
+
+//     } catch (error) {
+//       console.log(error)
+//       setResult({ pass: false, message: error });
+//     }
+//   }
+
+//   return (
+//     <>
+//       <h1>Live Validator</h1>
+
+//       <label>
+//         Passsword {" "}
+//         <input 
+//           type="password"
+//           onChange={handleChange}
+//         />
+//       </label>
+
+//       {result && (
+//         <p style={{ color: result.pass ? "green" : "red"}}>
+//           {result.message}
+//         </p>
+//       )}
+//     </>
+//   )
+// }
+
+
+const DATA = [
+  { id: 1, name: "I believe I can fly" },
+  { id: 2, name: "I believe I can touch the sky" },
+  { id: 3, name: "I think about it every night and day" },
+  { id: 4, name: "Spread my wings and fly away" },
+]
 
 function Snippet() {
-  // 에러 처리
-  const [error, setError] = useState(null);
-  // 대기상태 관리
-  const [isLoaded, setIsLoaded] = useState(false);
-  // 데이터 관리
-  const [profile, setProfile] = useState(null);
+  const [items, setItems] = useState(DATA);
 
-  // 데이터 요청
-  useEffect(() => {
-    getProfile() // 서버 요청함수 호출
-      .then(data => { // 요청 성공시에 데이터를 처리하는 부분
-        
-        // 전송받은 데이터로 profile을 업데이트한다
-        setProfile(data)
-      })
-      .catch(error => { // 요청 실패시에 에러를 처리하는 부분
-        setError(error)
-      })
-      .finally(() => setIsLoaded(true)) // 최종 작업
-      // 성공 실패 여부와 상관없이 항상 실행된다
-  }, [])
-
-  // 에러가 발생한 경우
-  if (error) {
-    return <p>잠시 후 다시 시도해주세요</p>
+  function handleClick(id) {
+    const updatedItems = items.filter((item) => item.id !== id);
+    setItems(updatedItems);
   }
 
-  // 가져오는 중
-  if (!isLoaded) {
-    return <p>데이터를 가져오는 중입니다..</p>
-  }
+  const history = items.map(item => (
+    <li key={item.id}>
+      {item.name} {" "}
+      <span onClick={() => handleClick(item.id)}>
+        &times;
+      </span>
+    </li>
+  ))
 
-  // 렌더링
   return (
-    <>
-      <h1>Profile</h1>
-      <img
-        src={profile.avatar}
-        alt={profile.username}
-        style={{
-          width: "100px",
-          height: "100px",
-          objectFit: "cover",
-          border: "1px solid #ddd",
-          borderRadius: "99px",
-        }}
-      />
-      <h3>{profile.username}</h3>
-      <p>{profile.bio}</p>
-    </>
+    <section>
+      <h1>Search History</h1>
+      <input type="search" placeholder="Search Google" disabled />
+      <ul>
+        {history}
+      </ul>
+    </section>
   )
 }

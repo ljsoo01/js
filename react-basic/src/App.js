@@ -158,25 +158,25 @@ function App() {
 */
 
 
-// function Snippet() {
-//   const cat = {
-//     name: "치즈",
-//     age: 2,
-//     home: null,
-//     sound: function () {
-//       return "야옹";
-//     }
-//   }
+function Snippet() {
+  const cat = {
+    name: "치즈",
+    age: 2,
+    home: null,
+    sound: function () {
+      return "야옹";
+    }
+  }
 
-//   return (
-//     <ul>
-//       <li>이름: {cat.name}</li>
-//       <li>나이: {cat.age}살</li>
-//       <li>집: {cat.home}</li>
-//       <li>울음소리: {cat.sound()}</li>
-//     </ul>
-//   )
-// }
+  return (
+    <ul>
+      <li>이름: {cat.name}</li>
+      <li>나이: {cat.age}살</li>
+      <li>집: {cat.home}</li>
+      <li>울음소리: {cat.sound()}</li>
+    </ul>
+  )
+}
 
 
 /*
@@ -1369,37 +1369,37 @@ function App() {
 // }
 
 
-const DATA = [
-  { id: 1, name: "I believe I can fly" },
-  { id: 2, name: "I believe I can touch the sky" },
-  { id: 3, name: "I think about it every night and day" },
-  { id: 4, name: "Spread my wings and fly away" },
-]
+// const DATA = [
+//   { id: 1, name: "I believe I can fly" },
+//   { id: 2, name: "I believe I can touch the sky" },
+//   { id: 3, name: "I think about it every night and day" },
+//   { id: 4, name: "Spread my wings and fly away" },
+// ]
 
-function Snippet() {
-  const [items, setItems] = useState(DATA);
+// function Snippet() {
+//   const [items, setItems] = useState(DATA);
 
-  function handleClick(id) {
-    const updatedItems = items.filter((item) => item.id !== id);
-    setItems(updatedItems);
-  }
+//   function handleClick(id) {
+//     const updatedItems = items.filter((item) => item.id !== id);
+//     setItems(updatedItems);
+//   }
 
-  const history = items.map(item => (
-    <li key={item.id}>
-      {item.name} {" "}
-      <span onClick={() => handleClick(item.id)}>
-        &times;
-      </span>
-    </li>
-  ))
+//   const history = items.map(item => (
+//     <li key={item.id}>
+//       {item.name} {" "}
+//       <span onClick={() => handleClick(item.id)}>
+//         &times;
+//       </span>
+//     </li>
+//   ))
 
-  return (
-    <section>
-      <h1>Search History</h1>
-      <input type="search" placeholder="Search Google" disabled />
-      <ul>
-        {history}
-      </ul>
-    </section>
-  )
-}
+//   return (
+//     <section>
+//       <h1>Search History</h1>
+//       <input type="search" placeholder="Search Google" disabled />
+//       <ul>
+//         {history}
+//       </ul>
+//     </section>
+//   )
+// }

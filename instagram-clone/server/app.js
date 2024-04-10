@@ -45,3 +45,37 @@ app.use(cors());
 
 
 app.use("/api/files", express.static("files"));
+
+
+/*
+  라우터 호출
+*/
+
+
+app.use("/api", indexRouter);
+
+
+/*
+  에러 핸들러
+*/
+
+
+// 404 에러 처리
+app.use((req, res, next) => {
+  const err = new createError.NotFound("Invalid URL");
+
+  next(err);
+})
+
+
+// 에러 핸들러
+app.use((err, req, res, next) => {
+  console.error(err);
+
+
+  res.status(err.status || 500).json(err.message);
+})
+
+
+// export
+module.exports = app;

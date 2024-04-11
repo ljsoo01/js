@@ -1,7 +1,7 @@
-const express = require("express")
+const express = require("express");
 const createError = require("http-errors");
 const cookieParser = require("cookie-parser");
-const looger = require("morgan");
+const logger = require("morgan");
 const cors = require("cors");
 const indexRouter = require("./routes/index");
 const app = express();
@@ -32,9 +32,9 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(compression());
+app.use(compression()); 
 app.use(helmet.crossOriginResourcePolicy({
-  policy: "cross-origin"
+  policy: "cross-origin" 
 }));
 app.use(cors());
 
@@ -47,12 +47,14 @@ app.use(cors());
 app.use("/api/files", express.static("files"));
 
 
+
 /*
   라우터 호출
 */
 
 
 app.use("/api", indexRouter);
+
 
 
 /*
@@ -71,9 +73,8 @@ app.use((req, res, next) => {
 // 에러 핸들러
 app.use((err, req, res, next) => {
   console.error(err);
-
-
-  res.status(err.status || 500).json(err.message);
+  
+  res.status(err.status || 500).json(err.message); 
 })
 
 

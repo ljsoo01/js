@@ -4,10 +4,10 @@ const auth = require("../middlewares/auth");
 const loginValidator = require("../middlewares/loginValidator");
 const signUpValidator = require("../middlewares/signUpValidator");
 const upload = require("../middlewares/upload");
-const userController = require("../middlewares/useController");
-const postController = require("../middlewares/postController");
-const commentController = require("../middlewares/commentController");
-const profileController = require("../middlewares/profileController");
+const userController = require("../controllers/userController");
+const postController = require("../controllers/postController");
+const commentController = require("../controllers/commentController");
+const profileController = require("../controllers/profileController");
 
 
 /*
@@ -55,7 +55,7 @@ router.delete("/posts/comments/:id", auth, commentController.deleteOne)
 
 
 // Profile 라우터
-router.get("/profiles", auth, profileController.find)
+router.get("/profiles", auth, profileController.find);
 router.get("/profiles/:username", auth, profileController.findOne)
 router.post("/profiles/:username/follow", auth, profileController.follow)
 router.delete("/profiles/:username/unfollow", auth, profileController.unfollow)

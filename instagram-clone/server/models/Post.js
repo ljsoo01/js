@@ -52,7 +52,7 @@ postSchema.virtual("photoUrls").get(function () {
 })
 
 
-// 댓글 갯수
+// 댓글 갯수 
 postSchema.virtual("commentCount", {
   ref: "Comment",
   localField: "_id",
@@ -60,11 +60,10 @@ postSchema.virtual("commentCount", {
   count: true
 })
 
-
 // 사용자의 게시물 좋아요 여부
 postSchema.virtual("liked", {
   ref: "Likes",
-  localField: "_id",
+  localField: "_id", 
   foreignField: "post",
   justOne: true
 })

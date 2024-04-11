@@ -9,7 +9,7 @@ const likesSchema = new Schema({
   user: { type: Schema.ObjectId, required: true },
   // 좋아요 한 게시물
   post: { type: Schema.ObjectId, required: true }
-}, {
+}, { 
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
 })

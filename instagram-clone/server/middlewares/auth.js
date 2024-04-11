@@ -1,4 +1,4 @@
-const JwtStrategy = require("passport-jwt").Strategy; 
+const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const User = require("../models/User");
 const passport = require("passport");
@@ -24,7 +24,7 @@ const jwtStrategy = new JwtStrategy(opts, async (payload, done) => {
     if (!user) {
       return done(null, false);
     }
-
+    
     // 인증 성공
     return done(null, user);
 

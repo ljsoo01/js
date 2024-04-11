@@ -4,7 +4,7 @@ const createError = require("http-errors");
 
 
 /*
-  유효성 검사절차
+  유효성 검사 절차
 
   1 이메일 검사
   2 비밀번호 검사
@@ -13,6 +13,7 @@ const createError = require("http-errors");
 
 module.exports = async (req, res, next) => {
   try {
+
     // 이메일 검사
     const emailResult = await body("email")
       .isEmail() // 올바른 이메일인지 검사
@@ -28,7 +29,7 @@ module.exports = async (req, res, next) => {
         }
       })
       .run(req);
-
+      
     // 에러 처리
     if (!emailResult.isEmpty()) {
       throw new createError.Unauthorized(emailResult.errors);
@@ -44,23 +45,23 @@ module.exports = async (req, res, next) => {
         const email = req.body.email;
         // 이메일로 유저 검색
         const user = await User.findOne({ email });
-
+        
         // 비밀번호 일치 검사
         if (!user.checkPassword(password)) {
           // 401 에러를 던진다
-          throw new createError.Unauthorized("Password does not match")
+          throw new createError.Unauthorized("Password does not match");
         }
       })
       .run(req)
 
-      // 비밀번호 에러 처리
-      if (!passwordResult.isEmpty()) {
-        throw new createError.Unauthorized(passwordResult.errors);
-      }
+    // 비밀번호 에러 처리
+    if (!passwordResult.isEmpty()) {
+      throw new createError.Unauthorized(passwordResult.errors);
+    }
 
 
-      // 다음 미들웨어 호출
-      next();
+    // 다음 미들웨어 호출
+    next();
 
   } catch (error) {
     // 에러 핸들러에게 에러를 전달한다

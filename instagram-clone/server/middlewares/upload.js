@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const opts = {}
 
 
-/* 
+/*
   파일 핸들러
 
   1 저장공간 설정
@@ -25,7 +25,7 @@ opts.storage = multer.diskStorage({
     // 확장자
     const extname = path.extname(file.originalname);
     // 랜덤 이름 생성
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * le9)
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
 
     cb(null, uniqueSuffix + extname);
   }
@@ -53,7 +53,7 @@ opts.fileFilter = (req, file, cb) => {
   if (isError) {
     // 400 에러 처리
     const err = new createError.BadRequest("Unacceptable type of file");
-
+    
     return cb(err);
   }
 
@@ -62,7 +62,7 @@ opts.fileFilter = (req, file, cb) => {
 
 
 // 제한 옵션
-opts.limits = { fileSize: le7 }; // 10MB 까지 업로드 가능
+opts.limits = { fileSize: 1e7 }; // 10MB 까지 업로드 가능
 
 
 // export

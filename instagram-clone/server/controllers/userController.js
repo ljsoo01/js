@@ -8,7 +8,7 @@ const User = require("../models/User");
   유저 생성 처리
 
   2 update
-  유저 정보 엄데이트 처리
+  유저 정보 업데이트 처리
 
   3 login
   로그인 처리

@@ -6,7 +6,7 @@ const Post = require("./Post");
 const Following = require("./Following");
 
 
-/*
+/* 
   User Schema
 */
 
@@ -29,7 +29,7 @@ const userSchema = new Schema({
 }, { // 옵션
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
-});
+}); 
 
 
 /*
@@ -55,9 +55,9 @@ userSchema.virtual("postCount", {
 })
 
 // 팔로워 수
-userSchema.virtual("followingCount", {
+userSchema.virtual("followerCount", {
   ref: "Following", // 조인
-  localField: "_id", 
+  localField: "_id",
   foreignField: "following",
   count: true
 })
@@ -70,7 +70,7 @@ userSchema.virtual("followingCount", {
   count: true
 })
 
-// 팔로잉 여부
+// 팔로우 여부
 userSchema.virtual("isFollowing", {
   ref: "Following",
   localField: "_id",
@@ -91,7 +91,7 @@ userSchema.methods.setPassword = function (password) {
   // 비밀번호 암호화에 사용되는 키
   this.salt = crypto
     .randomBytes(16).toString("hex");
-
+  
   // 비밀번호 암호화
   this.password = crypto
     .pbkdf2Sync(password, this.salt, 310000, 32, "sha256")
@@ -104,19 +104,18 @@ userSchema.methods.checkPassword = function (password) {
   const hashedPassword = crypto
     .pbkdf2Sync(password, this.salt, 310000, 32, "sha256")
     .toString("hex")
-
+  
   // this.password - 유저가 가입할 때 입력한 암호화된 비밀번호
-  // hashedPassword - 유저가 로그인할 때 입력한 암호화된 비밀번호
+  // hashedPassword - 유저가 로그인 할때 입력한 암호화된 비밀번호
   return this.password === hashedPassword;
 }
-
 
 // 로그인 토큰 생성
 userSchema.methods.generateJWT = function () {
   // 토큰에 저장되는 유저의 정보
-  const payload = {
-    sub: this._id,
-    username: this.username
+  const payload = { 
+    sub: this._id, 
+    username: this.username 
   }
 
   // 토큰 생성에 사용되는 키

@@ -14,7 +14,7 @@ const commentSchema = new Schema({
   post: { type: Schema.ObjectId, required: true },
   // 댓글 작성자
   user: { type: Schema.ObjectId, required: true, ref: "User" },
-}, {
+}, { 
   // 도큐먼트 생성시간 자동 저장
   timestamps: true,
   toJSON: { virtuals: true },
@@ -22,14 +22,14 @@ const commentSchema = new Schema({
 })
 
 
-/* 
+/*
   가상 필드
-*/ 
+*/
 
 
 // 보여주기용 날짜
 commentSchema.virtual("displayDate").get(function () {
-  const displayDate = DateTime  
+  const displayDate = DateTime
     .fromJSDate(this.createdAt)
     .toLocaleString(DateTime.DATETIME_MED);
 

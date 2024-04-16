@@ -29,19 +29,19 @@ async function seedDatabase() {
         username: "michelangelo",
         name: "Michelangelo",
         avatar: "michelangelo.jpg",
-        bio: "나는 대리석 안에서 천사를 보았고 그를 자유롭게 해줄 때까지 조각했다"
+        bio: "나는 대리석 안에서 천사를 보았고 그를 자유롭게 해줄 때까지 조각했다",
       },
       {
         username: "jobs",
         name: "Steve Jobs",
         avatar: "jobs.jpeg",
-        bio: "이야 아이폰 많이 좋아졌다"
+        bio: "이야 아이폰 많이 좋아졌다",
       },
       {
         username: "dog",
         name: "Mr.Loyal",
         avatar: "dog.jpeg",
-        bio: "멍"
+        bio: "멍",
       },
     ]
 
@@ -72,7 +72,7 @@ async function seedDatabase() {
       },
       {
         photos: ["pieta_1.jpg", "pieta_2.jpg"],
-        caption: "Pieta, St. Peter's Basillica, Rome"
+        caption: "Pieta, St. Peter's Basilica, Rome"
       },
       {
         photos: ["bacchus.png"],
@@ -93,8 +93,8 @@ async function seedDatabase() {
     for (let i = 0; i < posts.length; i++) {
       const post = new Post();
 
-      post.photos = photos[i].photos
-      post.caption = photos[i].caption
+      post.photos = posts[i].photos
+      post.caption = posts[i].caption
       post.user = user._id; // 미켈란젤로의 게시물
 
       await post.save();
@@ -107,7 +107,7 @@ async function seedDatabase() {
     console.log("Seed database has been completed");
 
 
-  } catch (error) {
+  } catch (error) { // 에러처리
     console.error(error);
   } finally {
     // 데이터베이스 연결 종료

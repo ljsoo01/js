@@ -89,3 +89,19 @@ export async function likePost(id) {
 
   return await res.json();
 }
+
+
+export async function unlikePost(id) {
+  const res = await fetch(`${server}/posts/${id}/unlike`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": getBearerToken()
+    }
+  }); 
+
+  if (!res.ok) {
+    throw new Error(res.statusText + "Error");
+  }
+
+  return await res.json();
+}

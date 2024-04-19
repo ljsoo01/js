@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./components/auth/AuthProvider";
 import AuthRequired from "./components/auth/AuthRequired";
 import Layout from "./components/Layout";
-import Feed from "./components/Feed";
+import Feed from "./components/Feed"; 
 import PostView from "./components/PostView";
 import Comments from "./components/comments/Comments";
 import Explore from "./components/Explore";
@@ -12,8 +12,8 @@ import Profile from "./components/Profile";
 import Followers from "./components/Followers";
 import Following from "./components/Following";
 import ProfileEdit from "./components/ProfileEdit";
-import NotFound from "./components/NotFound";
 import PostForm from "./components/PostForm";
+import NotFound from "./components/NotFound";
 
 
 export default function App() {
@@ -44,7 +44,7 @@ export default function App() {
 
           {/* 인증이 필요없는 라우트 */}
           <Route path="accounts/login" element={<Login />} />
-          <Route path="accounts/signUp" element={<SignUp />} />
+          <Route path="accounts/signup" element={<SignUp />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>

@@ -21,14 +21,35 @@ export default function Login() {
 
 
   // 폼 제출 처리
-  async function handleSubmit(e) {};
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
 
+      setError(null); // 에러 초기화
+
+      // 서버 요청
+      const { user } = await signIn(email, password);
+
+      // user 업데이트
+      setUser(user);
+
+      // 로그인에 성공한 이메일을 로컬스토리지에 저장한다
+      localStorage.setItem("email", email);
+
+      // 피드로 이동한다
+      setTimeout(() => {
+        navigate("/");
+      }, 500);
+
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   // 제목 업데이트
   useEffect(() => {
     document.title = "로그인 - Instagram"
   }, [])
-
 
   // 비밀번호 토글 버튼
   const passwordToggleButton = (
@@ -41,7 +62,6 @@ export default function Login() {
     </button>
   )
 
-
   return (
     <form onSubmit={handleSubmit} className="max-w-xs p-4 mt-16 mx-auto">
       {/* 로고 */}
@@ -52,7 +72,7 @@ export default function Login() {
       {/* 이메일 입력란 */}
       <div className="mb-2">
         <label className="block">
-          <input 
+          <input
             type="text"
             className="border px-2 py-1 w-full rounded"
             value={email}
@@ -65,7 +85,7 @@ export default function Login() {
       {/* 비밀번호 입력란 */}
       <div className="mb-2">
         <label className="block relative">
-          <input 
+          <input
             type={showPassword ? "text" : "password"}
             className="border px-2 py-1 w-full rounded"
             value={password}
@@ -80,7 +100,7 @@ export default function Login() {
       {/* 제출버튼 */}
       <button
         type="submit"
-        className="bg-blue-500 text-sm text-white font-semibold rounded px-4 py-2 w-full disabled:opacity-[0.5]"
+        className="bg-blue-500 text-sm text-white font-semibold rounded-lg px-4 py-2 w-full disabled:opacity-[0.5]"
         disabled={!isEmail(email) || !isPassword(password)}
       >
         로그인
@@ -95,12 +115,11 @@ export default function Login() {
 
       {/* 가입 링크 */}
       <p className="text-center my-4">
-        계정이 없으신가요 ? {" "}
+        계정이 없으신가요 ?  {" "}
         <Link to="/accounts/signup" className="text-blue-500 font-semibold">
           가입하기
         </Link>
       </p>
-dddddddd
     </form>
   )
 };

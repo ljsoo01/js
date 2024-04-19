@@ -12,13 +12,13 @@
 */
 
 export function isEmail(email) {
-  const patt = /[a-z0-9._%+\-]+@[a-z0.9.\-]+\.[a-z]{2,}$/
-
-  return patt.test(email);
+  const patt = /[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/
+  
+  return patt.test(email);  
 }
 
 export function isUsername(username) {
-  const patt = /^a-zA-z0-9]{5,}$/
+  const patt = /^[a-zA-Z0-9]{5,}$/
 
   return patt.test(username);
 }

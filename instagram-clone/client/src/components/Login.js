@@ -100,7 +100,7 @@ export default function Login() {
           가입하기
         </Link>
       </p>
-
+dddddddd
     </form>
   )
 };

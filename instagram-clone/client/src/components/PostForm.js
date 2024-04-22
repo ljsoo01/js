@@ -61,6 +61,15 @@ export default function PostForm() {
         onChange={({ target }) => setCaption(target.value)}
         value={caption}
       />
+
+      {/* 제출 버튼 */}
+      <button
+        type="submit"
+        className="px-4 py-2 text-sm font-semibold bg-blue-500 rounded-lg text-white disabled:opacity-[0.2]"
+        disabled={files.length < 1}
+      >
+        업로드
+      </button>
     </form>
   )
 };

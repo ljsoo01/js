@@ -32,7 +32,7 @@ export async function createComment(id, content) {
       "Authorization": getBearerToken(),
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ contnet })
+    body: JSON.stringify({ content })
   }); 
 
   if (!res.ok) {

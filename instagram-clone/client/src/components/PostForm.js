@@ -69,6 +69,7 @@ export default function PostForm() {
         disabled={files.length < 1}
       >
         업로드
+        rmfkrkkwsbikrutbksjbrjktbksrt
       </button>
     </form>
   )

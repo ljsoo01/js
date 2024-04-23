@@ -48,7 +48,8 @@ export async function createPost(formData) {
     method: "POST",
     headers: {
       "Authorization": getBearerToken()
-    }
+    },
+    body: formData
   }); 
 
   if (!res.ok) {

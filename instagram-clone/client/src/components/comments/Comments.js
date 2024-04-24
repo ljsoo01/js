@@ -61,4 +61,36 @@ export default function Comments() {
       handleDelete={handleDelete}
     />
   ))
+
+  return (
+    <div className="px-4">
+      <h3 className="text-lg font-semibold my-4">댓글</h3>
+
+      {/* 댓글 폼 */}
+      <Form handleAddComment={handleAddComment} />
+
+      {commentList.length > 0 ? (
+        <ul>
+          {commentList}
+        </ul>
+      ) : (
+        <p className="text-center">댓글이 없습니다</p>
+      )}
+
+      {/* 대기상태 표시 */}
+      {!isLoaded && (
+        <div className="flex justify-center my-4">
+          <FaCircleNotch
+            size="32"
+            className="animate-spin fill-blue-400"
+          />
+        </div>
+      )}
+
+      {/* 에러메시지 */}
+      {error && (
+        <p className="text-red-500">{error.message}</p>
+      )}
+    </div>
+  )
 };

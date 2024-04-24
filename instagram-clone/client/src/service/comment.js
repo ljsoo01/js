@@ -43,7 +43,7 @@ export async function createComment(id, content) {
 }
 
 
-export async function deleteComments(id, content) {
+export async function deleteComment(id, content) {
   const res = await fetch(`${server}/posts/comments/${id}`, {
     method: "DELETE",
     headers: {

@@ -52,10 +52,28 @@ export default function Profile() {
   }
 
   // 팔로우 처리
-  async function handleFollow() {};
+  async function handleFollow() {
+    try {
+      await follow(username)
+
+      setProfile({ ...profile, isFollowing: true })
+
+    } catch (error) {
+      alert(error)
+    }
+  };
 
   // 언팔로우 처리
-  async function handleUnfollow() {};
+  async function handleUnfollow() {
+    try {
+      await unfollow(username)
+
+      setProfile({ ...profile, isFollowing: false })
+
+    } catch (error) {
+      alert(error)
+    }
+  };
 
   // 로그아웃 처리
   async function handleSignOut() {

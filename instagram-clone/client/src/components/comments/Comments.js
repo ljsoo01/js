@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 // 서버 요청
-import { getComments, createComments, deleteComments } from "../../service/comment";
+import { getComments, createComments, deleteComments, createComment, deleteComment } from "../../service/comment";
 // 댓글 폼
 import Form from "./Form";
 // 각각의 댓글
@@ -44,10 +44,26 @@ export default function Comments() {
   }
 
   // 댓글 추가 처리
-  async function handleAddComment (content) {};
+  async function handleAddComment (content) {
+    // 서버 요청
+    const data = await createComment(id, content);
+
+    // comments 업데이트
+    const updatedComments = [data.comment, ...comments];
+    // data.comment: 새 댓글, comments: 기존의 댓글
+    setComments(updatedComments);
+  };
 
   // 댓글 삭제 처리
-  async function handleDelete(id) {};
+  async function handleDelete(id) {
+    // 댓글 삭제 요청
+    await deleteComment(id);
+
+    // comments 업데이트
+    const remainingComments = comments.filter(comment => comment.id !== id);
+
+    setComments(remainingComments);
+  };
 
   // 댓글 렌더링 처리
   const commentList = comments.map(comment => (

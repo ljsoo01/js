@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { getPublicData } from './service/api';
 import {FaCarBurst } from 'react-icons/fa6';
 import KaKaoMap from './components/KakaoMap';
+import RechartLineBar from './components/RechartLineBar';
+import RechartPie from './components/RechartPie';
 
 const SIGNGUS = [
   {signguCode: "11110", city: "서울특별시", name: "종로구"},
@@ -14,6 +16,7 @@ function App() {
   const [signgus, setSigngus] = useState("11110");
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [accidents, setAccidents] = useState([]);
 
   const signguList = SIGNGUS.map(signgu => (
     <option key={signgu.signguCode} value={signgu.signguCode}>
@@ -33,6 +36,8 @@ function App() {
 
       console.log(data);
 
+      setAccidents(data.response.body.items.item)
+
     } catch (error) {
       setError(error)
     } finally {
@@ -43,6 +48,14 @@ function App() {
   useEffect(() => {
     fetchData();
   }, [signgus]);
+
+  if (!isLoaded) {
+    return (
+      <div>
+        <div>잠시 기다려주세요</div>
+      </div>
+    )
+  }
 
   return (
     <div className="App">
@@ -64,7 +77,17 @@ function App() {
         </div>
       </header>
 
-      <KaKaoMap />
+      <KaKaoMap accidents={accidents}/>
+
+      <div className='grid grid-cols-2 gap-4 p-4 border-2'>
+        <div className='border shadow-lg'>
+          <RechartLineBar accidents={accidents} />
+        </div>
+        <div className='border shadow-lg'>
+          <RechartPie accidents={accidents}/>
+        </div>
+      </div>
+
     </div>
   );
 }

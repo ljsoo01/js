@@ -13,7 +13,7 @@ export default function Chart({ accidents }) {
 
     return (
       <div className='h-[500px]'>
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height="90%">
         <RadarChart cx="50%" cy="50%" outerRadius="60%" data={data}>
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" />
